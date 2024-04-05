@@ -7,9 +7,13 @@
     "name": "Mateus José Barbosa <> Loomi"
   },
   "main": "",
-  "scripts": {},
-  "dependencies": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
+    "eslint": "8.57.0",
+    "lint": "workspace:*",
+    "prettier": "3.2.5",
     "tsconfig": "workspace:*",
     "typescript": "5.4.4"
   },
