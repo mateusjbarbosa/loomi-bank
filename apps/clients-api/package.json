@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc",
     "db:studio": "drizzle-kit studio --port 4000",
-    "dev": "nodemon -r dotenv/config"
+    "dev": "nodemon -r dotenv/config",
+    "test": "vitest run"
   },
   "dependencies": {
     "fastify": "4.26.2",
@@ -29,7 +30,9 @@
     "prettier": "3.2.5",
     "ts-node": "10.9.2",
     "tsconfig": "workspace:*",
-    "typescript": "5.4.4"
+    "typescript": "5.4.4",
+    "vitest": "1.4.0",
+    "vitest-config": "workspace:*"
   },
   "engines": {
     "node": ">=20.12.1",
