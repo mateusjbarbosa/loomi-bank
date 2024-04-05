@@ -13,7 +13,7 @@ server.get('/', async function handler () {
 
 const start = async () => {
   try {
-    await server.listen({ port: process.env.PORT as unknown as number });
+    await server.listen({ port: process.env.PORT as unknown as number }); // TODO: env
   } catch (err) {
     server.log.error(err);
     process.exit(1);

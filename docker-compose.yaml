@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  clients-db:
+    image: bitnami/postgresql:16.2.0
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=clients
+      - POSTGRES_PASSWORD=clients
+      - POSTGRES_DB=clients_db
+    volumes:
+      - clients_data:/bitnami/postgresql
+  transactions-db:
+    image: bitnami/postgresql:16.2.0
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=transactions
+      - POSTGRES_PASSWORD=transactions
+      - POSTGRES_DB=transactions_db
+    volumes:
+      - transactions_data:/bitnami/postgresql
+
+volumes:
+  clients_data:
+  transactions_data:

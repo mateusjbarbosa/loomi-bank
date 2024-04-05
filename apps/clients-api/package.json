@@ -9,14 +9,19 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
+    "db:studio": "drizzle-kit studio --port 4000",
     "dev": "nodemon -r dotenv/config"
   },
   "dependencies": {
-    "fastify": "4.26.2"
+    "fastify": "4.26.2",
+    "pg": "8.11.5",
+    "postgres": "3.4.4"
   },
   "devDependencies": {
     "@types/node": "20.12.4",
     "dotenv": "16.4.5",
+    "drizzle-kit": "0.20.14",
+    "drizzle-orm": "0.30.7",
     "eslint": "8.57.0",
     "lint": "workspace:*",
     "nodemon": "3.1.0",
