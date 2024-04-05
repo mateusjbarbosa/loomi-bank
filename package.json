@@ -1,0 +1,15 @@
+{
+  "name": "loomi-bank",
+  "version": "0.0.0",
+  "description": "The loomi Bank is an innovative digital bank focused on fast operations",
+  "license": "MIT",
+  "author": {
+    "name": "Mateus José Barbosa <> Loomi"
+  },
+  "main": "",
+  "scripts": {},
+  "engines": {
+    "node": ">=20.12.1",
+    "pnpm": ">=8.15.5"
+  }
+}

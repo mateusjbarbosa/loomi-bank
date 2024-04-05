@@ -1,0 +1,15 @@
+{
+  "name": "transactions-api",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": {
+    "name": "Mateus José Barbosa <> Loomi"
+  },
+  "main": "",
+  "scripts": {},
+  "engines": {
+    "node": ">=20.12.1",
+    "pnpm": ">=8.15.5"
+  }
+}
