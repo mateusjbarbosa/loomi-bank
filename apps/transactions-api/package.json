@@ -6,14 +6,22 @@
   "author": {
     "name": "Mateus José Barbosa <> Loomi"
   },
-  "main": "",
+  "main": "dist/main.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "nodemon -r dotenv/config"
+  },
+  "dependencies": {
+    "fastify": "4.26.2"
   },
   "devDependencies": {
+    "@types/node": "20.12.4",
+    "dotenv": "16.4.5",
     "eslint": "8.57.0",
     "lint": "workspace:*",
+    "nodemon": "3.1.0",
     "prettier": "3.2.5",
+    "ts-node": "10.9.2",
     "tsconfig": "workspace:*",
     "typescript": "5.4.4"
   },
