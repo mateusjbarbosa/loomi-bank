@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import Fastify from 'fastify';
+import { env } from './env';
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ server.get('/', async function handler () {
 
 const start = async () => {
   try {
-    await server.listen({ port: process.env.PORT as unknown as number }); // TODO: env
+    await server.listen({ port: env.PORT });
   } catch (err) {
     server.log.error(err);
     process.exit(1);
