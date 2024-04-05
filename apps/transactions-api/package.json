@@ -8,6 +8,11 @@
   },
   "main": "",
   "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "tsconfig": "workspace:*",
+    "typescript": "5.4.4"
+  },
   "engines": {
     "node": ">=20.12.1",
     "pnpm": ">=8.15.5"
