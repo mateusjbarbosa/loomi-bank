@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
+dotenv.config();
+
 import Fastify from 'fastify';
 import { env } from './env';
-
-dotenv.config();
 
 const server = Fastify({
   logger: true
