@@ -3,6 +3,7 @@ dotenv.config();
 
 import Fastify from 'fastify';
 import { env } from './env';
+import { createClientRoute } from './http/create-client';
 
 const server = Fastify({
   logger: true
@@ -11,6 +12,8 @@ const server = Fastify({
 server.get('/', async function handler () {
   return { message: 'clients-api' };
 });
+
+server.register(createClientRoute, { prefix: 'v1' });
 
 const start = async () => {
   try {
