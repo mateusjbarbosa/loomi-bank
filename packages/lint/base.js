@@ -14,6 +14,7 @@ module.exports = {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     'max-len': ['error', { code: 100 }],
+    'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
   },
