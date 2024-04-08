@@ -1,0 +1,21 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": {
+    "name": "Mateus José Barbosa <> Loomi"
+  },
+  "main": "config.js",
+  "scripts": {},
+  "dependencies": {
+    "winston": "3.13.0"
+  },
+  "devDependencies": {
+    "typescript": "5.4.4"
+  },
+  "engines": {
+    "node": ">=20.12.1",
+    "pnpm": ">=8.15.5"
+  }
+}
