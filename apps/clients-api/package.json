@@ -9,11 +9,14 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
-    "db:studio": "drizzle-kit studio --port 4000",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "ts-node --files ./src/database/migrate.ts",
+    "db:push": "drizzle-kit push:pg",
     "dev": "nodemon -r dotenv/config",
     "test": "vitest run"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "2.2.2",
     "dotenv": "16.4.5",
     "fastify": "4.26.2",
     "logger": "workspace:*",
