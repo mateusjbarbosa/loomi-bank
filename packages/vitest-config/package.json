@@ -8,9 +8,6 @@
   },
   "main": "config.js",
   "scripts": {},
-  "devDependencies": {
-    "typescript": "5.4.4"
-  },
   "engines": {
     "node": ">=20.12.1",
     "pnpm": ">=8.15.5"
