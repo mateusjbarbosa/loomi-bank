@@ -6,8 +6,36 @@
   "author": {
     "name": "Mateus José Barbosa <> Loomi"
   },
-  "main": "",
-  "scripts": {},
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "db:studio": "drizzle-kit studio --port 4000",
+    "dev": "nodemon -r dotenv/config",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "dotenv": "16.4.5",
+    "fastify": "4.26.2",
+    "logger": "workspace:*",
+    "pg": "8.11.5",
+    "postgres": "3.4.4",
+    "winston": "3.13.0",
+    "zod": "3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.4",
+    "drizzle-kit": "0.20.14",
+    "drizzle-orm": "0.30.7",
+    "eslint": "8.57.0",
+    "lint": "workspace:*",
+    "nodemon": "3.1.0",
+    "prettier": "3.2.5",
+    "ts-node": "10.9.2",
+    "tsconfig": "workspace:*",
+    "typescript": "5.4.4",
+    "vitest": "1.4.0",
+    "vitest-config": "workspace:*"
+  },
   "engines": {
     "node": ">=20.12.1",
     "pnpm": ">=8.15.5"

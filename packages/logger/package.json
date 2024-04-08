@@ -1,13 +1,16 @@
 {
-  "name": "tsconfig",
+  "name": "logger",
   "version": "1.0.0",
   "description": "",
   "license": "MIT",
   "author": {
     "name": "Mateus José Barbosa <> Loomi"
   },
-  "main": "",
+  "main": "config.js",
   "scripts": {},
+  "dependencies": {
+    "winston": "3.13.0"
+  },
   "devDependencies": {
     "typescript": "5.4.4"
   },

@@ -1,0 +1,7 @@
+{
+  "extends": "tsconfig/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": ["src", "tests", "drizzle.config.ts"]
+}
