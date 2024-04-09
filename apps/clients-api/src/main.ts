@@ -7,6 +7,7 @@ import { env } from './env';
 import { createClientRoute } from './http/create-client';
 import { getClientRoute } from './http/get-client';
 import { updateClientRoute } from './http/update-client';
+import { updateClientAvatarRoute } from './http/update-client-avatar';
 
 const server = Fastify({
   logger: true
@@ -20,6 +21,7 @@ server.register(createClientRoute, { prefix: 'api' });
 server.register(getClientRoute, { prefix: 'api' });
 server.register(updateClientRoute, { prefix: 'api' });
 server.register(multipart);
+server.register(updateClientAvatarRoute, { prefix: 'api' });
 
 const start = async () => {
   try {
