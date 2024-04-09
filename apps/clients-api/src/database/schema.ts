@@ -8,6 +8,7 @@ export const clients = pgTable('clients', {
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   address: text('address').notNull(),
+  avatarId: text('avatar_id').notNull().default(''),
   agency: integer('agency').notNull(),
   account: integer('account').unique().notNull(),
   digit: varchar('digit', { length: 1 }).notNull(),

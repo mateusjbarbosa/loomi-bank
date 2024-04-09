@@ -1,5 +1,5 @@
 {
-  "id": "93703c05-de23-4f8b-92ff-9b6adebdd399",
+  "id": "9c57c00b-2cd8-424a-9bc3-2fb3b42d5e93",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -31,6 +31,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "avatar_id": {
+          "name": "avatar_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
         },
         "agency": {
           "name": "agency",
