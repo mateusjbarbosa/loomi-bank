@@ -7,6 +7,10 @@ export interface ClientsRepository {
   getByEmail(email: string): Promise<Client | null>
   getById(id: string): Promise<Client | null>
   getLastAccount(): Promise<BankingDetails | null>
+  update(
+    id: string,
+    client: Partial<Pick<Client, 'name' | 'email' | 'address'>>
+  ): Promise<{id: string}>
   save(client: Client): Promise<{id: string}>
 }
 
@@ -77,6 +81,20 @@ export class ClientsRepositoryDatabase implements ClientsRepository {
       account: client.bankingDetails!.account,
       digit: client.bankingDetails!.digit,
     }).returning();
+
+    return {
+      id: response[0].id
+    };
+  }
+
+  async update(
+    id: string,
+    client: Partial<Pick<Client, 'name' | 'email' | 'address'>>
+  ): Promise<{id: string}> {
+    const response = await db.update(clients)
+      .set(client)
+      .where(eq(clients.id, id))
+      .returning();
 
     return {
       id: response[0].id
