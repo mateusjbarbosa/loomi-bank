@@ -10,6 +10,7 @@ export const clientSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   address: z.string(),
+  avatarId: z.string().optional(),
   bankingDetails: bankingDetailsSchema.optional(),
 });
 
