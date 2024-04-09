@@ -8,18 +8,18 @@ export class CreateClientUsecase {
   constructor(readonly clientsRepository: ClientsRepository) {}
 
   async execute({ client }: Input): Promise<Output> {
-    const existsClient = await this.clientsRepository.getByEmail(client.email);
-
-    if (existsClient) {
-      return {
-        success: false,
-        message: 'Already exists client with this e-mail'
-      };
-    }
-
-    const bankingDetails = await this.generateClientAccount();
-
     try {
+      const existsClient = await this.clientsRepository.getByEmail(client.email);
+
+      if (existsClient) {
+        return {
+          success: false,
+          message: 'Already exists client with this e-mail'
+        };
+      }
+
+      const bankingDetails = await this.generateClientAccount();
+
       const response = await this.clientsRepository.save({
         ...client,
         bankingDetails
