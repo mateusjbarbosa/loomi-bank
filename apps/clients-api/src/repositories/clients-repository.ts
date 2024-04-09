@@ -9,7 +9,7 @@ export interface ClientsRepository {
   getLastAccount(): Promise<BankingDetails | null>
   update(
     id: string,
-    client: Partial<Pick<Client, 'name' | 'email' | 'address'>>
+    client: Partial<Pick<Client, 'name' | 'email' | 'address' | 'avatarId'>>
   ): Promise<{id: string}>
   save(client: Client): Promise<{id: string}>
 }
@@ -27,6 +27,7 @@ export class ClientsRepositoryDatabase implements ClientsRepository {
       name: data[0].name,
       email: data[0].email,
       address: data[0].address,
+      avatarId: data[0].avatarId,
       bankingDetails: {
         agency: data[0].agency,
         account: data[0].account,
@@ -44,6 +45,7 @@ export class ClientsRepositoryDatabase implements ClientsRepository {
       name: data[0].name,
       email: data[0].email,
       address: data[0].address,
+      avatarId: data[0].avatarId,
       bankingDetails: {
         agency: data[0].agency,
         account: data[0].account,
@@ -89,7 +91,7 @@ export class ClientsRepositoryDatabase implements ClientsRepository {
 
   async update(
     id: string,
-    client: Partial<Pick<Client, 'name' | 'email' | 'address'>>
+    client: Partial<Pick<Client, 'name' | 'email' | 'address' | 'avatarId'>>
   ): Promise<{id: string}> {
     const response = await db.update(clients)
       .set(client)

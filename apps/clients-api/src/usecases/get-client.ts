@@ -1,3 +1,4 @@
+import { env } from '../env';
 import { Client } from '../models/client';
 import { ClientsRepository } from '../repositories/clients-repository';
 
@@ -26,6 +27,7 @@ export class GetClientUsecase {
           name: client.name,
           email: client.email,
           address: client.address,
+          avatarId: client.avatarId ? env.AWS_BUCKET_BASE_URL + client.avatarId : '',
           bankingDetails: {
             agency: client.bankingDetails!.agency.toString().padStart(4, '0'),
             account: client.bankingDetails!.account.toString().padStart(8, '0'),
@@ -53,6 +55,6 @@ interface BankingDetailsOutput { bankingDetails: { agency: string, account: stri
 
 interface Output {
   success: boolean
-  data?: Pick<Client, 'name' | 'email' | 'address'> & BankingDetailsOutput
+  data?: Pick<Client, 'name' | 'email' | 'address' | 'avatarId'> & BankingDetailsOutput
   message?: string
 }
