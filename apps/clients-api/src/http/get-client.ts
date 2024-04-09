@@ -8,12 +8,12 @@ import { GetClientUsecase } from '../usecases/get-client';
 
 export async function getClientRoute(app: FastifyInstance) {
   app.get('/clients/:id', async (request, reply) => {
-    const getClientSchema = z.object({
+    const getClientParamsSchema = z.object({
       id: z.string()
     });
 
     try {
-      const { id } = getClientSchema.parse(request.params);
+      const { id } = getClientParamsSchema.parse(request.params);
       const repository = new ClientsRepositoryDatabase();
       const usecase = new GetClientUsecase(repository);
       const response = await usecase.execute({ id });
