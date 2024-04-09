@@ -27,6 +27,7 @@ export class CreateClientUsecase {
 
       // TODO: log
       // TODO: create queue message
+      // TODO: send e-mail
 
       return {
         success: true,

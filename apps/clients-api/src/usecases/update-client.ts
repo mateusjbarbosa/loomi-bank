@@ -24,6 +24,7 @@ export class UpdateClientUsecase {
 
       // TODO: log
       // TODO: create queue message
+      // TODO: send e-mail
 
       return {
         success: true,
