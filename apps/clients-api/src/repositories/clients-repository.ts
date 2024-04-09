@@ -5,6 +5,7 @@ import { BankingDetails, Client } from '../models/client';
 
 export interface ClientsRepository {
   getByEmail(email: string): Promise<Client | null>
+  getById(id: string): Promise<Client | null>
   getLastAccount(): Promise<BankingDetails | null>
   save(client: Client): Promise<{id: string}>
 }
@@ -15,6 +16,23 @@ export class ClientsRepositoryDatabase implements ClientsRepository {
 
   async getByEmail(email: string): Promise<Client | null> {
     const data = await db.select().from(clients).where(eq(clients.email, email));
+
+    if (!data[0]) return null;
+
+    return {
+      name: data[0].name,
+      email: data[0].email,
+      address: data[0].address,
+      bankingDetails: {
+        agency: data[0].agency,
+        account: data[0].account,
+        digit: data[0].digit,
+      }
+    };
+  }
+
+  async getById(id: string): Promise<Client | null> {
+    const data = await db.select().from(clients).where(eq(clients.id, id));
 
     if (!data[0]) return null;
 
