@@ -22,7 +22,7 @@ export async function createClientRoute(app: FastifyInstance) {
         });
       }
 
-      return reply.status(201).headers({ location: `/v1/users/${response.data!.id}` }).send();
+      return reply.status(201).headers({ location: `/api/clients/${response.data!.id}` }).send();
     } catch (e) {
       if (e instanceof ZodError) {
         const validationError = fromZodError(e);

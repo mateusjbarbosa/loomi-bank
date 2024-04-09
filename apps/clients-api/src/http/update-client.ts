@@ -32,7 +32,7 @@ export async function updateClientRoute(app: FastifyInstance) {
         });
       }
 
-      return reply.status(200).headers({ location: `/v1/users/${id}` }).send();
+      return reply.status(200).headers({ location: `/api/clients/${id}` }).send();
     } catch (e) {
       if (e instanceof ZodError) {
         const validationError = fromZodError(e);
