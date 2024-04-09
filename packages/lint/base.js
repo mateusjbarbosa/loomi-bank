@@ -13,7 +13,7 @@ module.exports = {
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
-    'max-len': ['error', { code: 100 }],
+    'max-len': ['error', { code: 100, ignoreComments: true }],
     'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
     'object-curly-spacing': ["error", "always"],
     quotes: ['error', 'single'],
