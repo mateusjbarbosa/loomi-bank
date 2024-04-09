@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import multipart from '@fastify/multipart';
 import Fastify from 'fastify';
 import { env } from './env';
 import { createClientRoute } from './http/create-client';
@@ -18,6 +19,7 @@ server.get('/', async function handler () {
 server.register(createClientRoute, { prefix: 'api' });
 server.register(getClientRoute, { prefix: 'api' });
 server.register(updateClientRoute, { prefix: 'api' });
+server.register(multipart);
 
 const start = async () => {
   try {
