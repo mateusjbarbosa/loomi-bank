@@ -9,7 +9,7 @@ const bankingDetailsSchema = z.object({
 export const clientSchema = z.object({
   name: z.string(),
   email: z.string().email(),
-  address: z.string().min(4),
+  address: z.string(),
   bankingDetails: bankingDetailsSchema.optional(),
 });
 
