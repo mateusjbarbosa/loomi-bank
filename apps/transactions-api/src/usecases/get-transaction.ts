@@ -1,3 +1,4 @@
+import { logger } from 'logger';
 import { Transaction } from '../models/transaction';
 import { ClientsRepository } from '../repositories/clients-repository';
 import { TransactionsRepository } from '../repositories/transactions-repository';
@@ -15,6 +16,11 @@ export class GetTransactionUsecase {
     try {
       const transaction = await this.transactionsRepository.getById(id);
       if (!transaction) {
+        logger.log({
+          level: 'info',
+          message: 'Transaction not found'
+        });
+
         return {
           success: false,
           message: 'Transaction not found'
@@ -23,8 +29,6 @@ export class GetTransactionUsecase {
 
       const sender = await this.clientsRepository.getById(transaction.senderId);
       const receiver = await this.clientsRepository.getById(transaction.receiverId);
-
-      // TODO: log
 
       return {
         success: true,
@@ -39,7 +43,11 @@ export class GetTransactionUsecase {
       };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message

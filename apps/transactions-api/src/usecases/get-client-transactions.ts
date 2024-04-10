@@ -1,3 +1,4 @@
+import { logger } from 'logger';
 import { Transaction } from '../models/transaction';
 import { ClientsRepository } from '../repositories/clients-repository';
 import { TransactionsRepository } from '../repositories/transactions-repository';
@@ -16,6 +17,11 @@ export class GetClientTransactionsUsecase {
       const transactions = await this.transactionsRepository.filterByClientId(id);
 
       if (!transactions) {
+        logger.log({
+          level: 'info',
+          message: 'Sender not found'
+        });
+
         return {
           success: false,
           message: 'Sender not found'
@@ -42,15 +48,17 @@ export class GetClientTransactionsUsecase {
         });
       }
 
-      // TODO: log
-
       return {
         success: true,
         data: output
       };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message

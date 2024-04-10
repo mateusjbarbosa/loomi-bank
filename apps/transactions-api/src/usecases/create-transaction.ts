@@ -1,3 +1,4 @@
+import { logger } from 'logger';
 import { Transaction } from '../models/transaction';
 import { ClientsRepository } from '../repositories/clients-repository';
 import { NotificationsRepository } from '../repositories/notifications-repository';
@@ -18,6 +19,11 @@ export class CreateTransactionUsecase {
       const existsSender = await this.clientsRepository.getById(transaction.senderId);
 
       if (!existsSender) {
+        logger.log({
+          level: 'info',
+          message: 'Sender client not found'
+        });
+
         return {
           success: false,
           message: 'Sender client not found'
@@ -27,13 +33,23 @@ export class CreateTransactionUsecase {
       const existsReceiver = await this.clientsRepository.getById(transaction.receiverId);
 
       if (!existsReceiver) {
+        logger.log({
+          level: 'info',
+          message: 'Receiver client not found'
+        });
+
         return {
           success: false,
-          message: 'Sender client not found'
+          message: 'Receiver client not found'
         };
       }
 
       if (transaction.amount <= 0) {
+        logger.log({
+          level: 'info',
+          message: 'Invalid amount'
+        });
+
         return {
           success: false,
           message: 'Invalid amount'
@@ -54,7 +70,11 @@ export class CreateTransactionUsecase {
         message: 'Transação recebida'
       });
 
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: `Created transaction: ${response.id}`
+      });
+
       // TODO: create queue message
       // TODO: send e-mail
 
@@ -66,7 +86,11 @@ export class CreateTransactionUsecase {
       };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message
