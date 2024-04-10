@@ -1,4 +1,5 @@
 import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { logger } from 'logger';
 import { env } from '../env';
 
 export interface StorageRepository {
@@ -33,9 +34,13 @@ export class S3Adapter implements StorageRepository {
       return {
         success: true,
       };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-    // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message
@@ -58,7 +63,11 @@ export class S3Adapter implements StorageRepository {
       };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message

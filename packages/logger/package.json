@@ -1,12 +1,12 @@
 {
   "name": "logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "license": "MIT",
   "author": {
     "name": "Mateus José Barbosa <> Loomi"
   },
-  "main": "config.js",
+  "main": "config.ts",
   "scripts": {},
   "dependencies": {
     "winston": "3.13.0"

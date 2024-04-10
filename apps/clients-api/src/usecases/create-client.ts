@@ -1,3 +1,4 @@
+import { logger } from 'logger';
 import { BankingDetails, Client } from '../models/client';
 import { ClientsRepository } from '../repositories/clients-repository';
 
@@ -12,6 +13,11 @@ export class CreateClientUsecase {
       const existsClient = await this.clientsRepository.getByEmail(client.email);
 
       if (existsClient) {
+        logger.log({
+          level: 'info',
+          message: `Already exists client: ${client.email}`
+        });
+
         return {
           success: false,
           message: 'Already exists client with this e-mail'
@@ -25,7 +31,11 @@ export class CreateClientUsecase {
         bankingDetails
       });
 
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: `Created client: ${response.id}`
+      });
+
       // TODO: create queue message
       // TODO: send e-mail
 
@@ -37,7 +47,11 @@ export class CreateClientUsecase {
       };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message

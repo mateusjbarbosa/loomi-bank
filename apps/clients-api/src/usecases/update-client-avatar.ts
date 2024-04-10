@@ -1,3 +1,4 @@
+import { logger } from 'logger';
 import { ClientsRepository } from '../repositories/clients-repository';
 import { StorageRepository } from '../repositories/storage-repository';
 
@@ -15,6 +16,11 @@ export class UpdateClientAvatarUsecase {
       const clientData = await this.clientsRepository.getById(id);
 
       if (!clientData) {
+        logger.log({
+          level: 'info',
+          message: 'Client not found'
+        });
+
         return {
           success: false,
           message: 'Client not found'
@@ -24,6 +30,11 @@ export class UpdateClientAvatarUsecase {
       const storageResponse = await this.storageRepository.saveFile(id, file, mimetype);
 
       if (!storageResponse.success) {
+        logger.log({
+          level: 'info',
+          message: storageResponse.message ?? ''
+        });
+
         return {
           success: false,
           message: storageResponse.message
@@ -35,7 +46,11 @@ export class UpdateClientAvatarUsecase {
       return { success: true };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message

@@ -1,3 +1,4 @@
+import { logger } from 'logger';
 import { env } from '../env';
 import { Client } from '../models/client';
 import { ClientsRepository } from '../repositories/clients-repository';
@@ -13,13 +14,16 @@ export class GetClientUsecase {
       const client = await this.clientsRepository.getById(id);
 
       if (!client) {
+        logger.log({
+          level: 'info',
+          message: 'Client not found'
+        });
+
         return {
           success: false,
           message: 'Client not found'
         };
       }
-
-      // TODO: log
 
       return {
         success: true,
@@ -37,7 +41,11 @@ export class GetClientUsecase {
       };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message

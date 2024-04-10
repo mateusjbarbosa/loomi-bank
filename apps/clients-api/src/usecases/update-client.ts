@@ -1,3 +1,4 @@
+import { logger } from 'logger';
 import { Client } from '../models/client';
 import { ClientsRepository } from '../repositories/clients-repository';
 
@@ -12,6 +13,11 @@ export class UpdateClientUsecase {
       const clientData = await this.clientsRepository.getById(id);
 
       if (!clientData) {
+        logger.log({
+          level: 'info',
+          message: 'Client not found'
+        });
+
         return {
           success: false,
           message: 'Client not found'
@@ -22,7 +28,11 @@ export class UpdateClientUsecase {
         ...client
       });
 
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: `Updated client: ${response.id}`
+      });
+
       // TODO: create queue message
       // TODO: send e-mail
 
@@ -34,7 +44,11 @@ export class UpdateClientUsecase {
       };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(e: any) { // TODO: type error
-      // TODO: log
+      logger.log({
+        level: 'info',
+        message: e.message
+      });
+
       return {
         success: false,
         message: e.message
