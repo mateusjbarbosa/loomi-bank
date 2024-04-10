@@ -3,6 +3,7 @@ import { ZodError } from 'zod';
 import { fromZodError } from 'zod-validation-error';
 import { transactionSchema } from '../models/transaction';
 import { ClientsRepositoryDatabase } from '../repositories/clients-repository';
+import { NotificationsRepositoryMemory } from '../repositories/notifications-repository';
 import { TransactionsRepositoryDatabase } from '../repositories/transactions-repository';
 import { CreateTransactionUsecase } from '../usecases/create-transaction';
 
@@ -14,8 +15,13 @@ export async function createTransactionRoute(app: FastifyInstance) {
       const transaction = transactionSchema.parse(request.body);
 
       const clientsRepository = new ClientsRepositoryDatabase();
+      const notificationsRepository = new NotificationsRepositoryMemory();
       const transactionsRepository = new TransactionsRepositoryDatabase();
-      const usecase = new CreateTransactionUsecase(clientsRepository, transactionsRepository);
+      const usecase = new CreateTransactionUsecase(
+        clientsRepository,
+        notificationsRepository,
+        transactionsRepository
+      );
       const response = await usecase.execute({ transaction });
 
       if (!response.success) {
