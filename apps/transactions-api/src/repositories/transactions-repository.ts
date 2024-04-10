@@ -4,6 +4,9 @@ import { transactions } from '../database/schema';
 import { Transaction } from '../models/transaction';
 
 export interface TransactionsRepository {
+  filterByClientId(
+    id: string
+  ): Promise<Pick<Transaction, 'receiverId' | 'amount' | 'description'>[] | null>
   getById(id: string): Promise<Transaction | null>
   save(client: Transaction): Promise<{id: string}>
 }
@@ -11,6 +14,22 @@ export interface TransactionsRepository {
 export class TransactionsRepositoryDatabase implements TransactionsRepository {
 
   constructor() {}
+
+  async filterByClientId(
+    id: string
+  ): Promise<Pick<Transaction, 'receiverId' | 'amount' | 'description'>[] | null> {
+    const data = await db.select().from(transactions).where(eq(transactions.senderId, id));
+
+    if (!data[0]) return null;
+
+    return data.map(item => {
+      return {
+        receiverId: item.receiverId,
+        amount: item.amount,
+        description: item.description ?? ''
+      };
+    });
+  }
 
   async getById(id: string): Promise<Transaction | null> {
     const data = await db.select().from(transactions).where(eq(transactions.id, id));
