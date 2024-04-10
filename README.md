@@ -54,3 +54,67 @@ Um monorepo com dois microsserviços para gestão de clientes e transações.
 ```sh
   $ pnpm -r dev
 ```
+
+## Endpoints
+
+### clients-api
+
+- POST /api/clients
+
+  - Para criar novos clientes
+
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john.doe@email.com",
+    "address": "Rua das transferências, 1234, Banco Feliz, Ilhas Bancárias, Brasil, 12345-000"
+  }
+  ```
+
+- GET /api/clients/:id
+
+  - Para obter detalhes de um usuário
+
+- PATCH /api/clients/:id
+
+  - Para atualizar dados de um usuário
+
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john.doe@email.com",
+    "address": "Rua das transferências, 1234, Banco Feliz, Ilhas Bancárias, Brasil, 12345-000"
+  }
+  ```
+
+- PATCH /api/clients/:id/avatar
+
+  - Para atualizar o avatar de um usuário
+
+  ```sh
+    # multipart/form-data
+    file: image/jpeg
+  ```
+
+### transactions-api
+
+- POST /api/transactions
+
+  - Para criar novas transferências
+
+  ```json
+  {
+    "senderId": "example_cuid2",
+    "receiverId": "example_cuid2",
+    "amount": 150,
+    "description": "Almoço"
+  }
+  ```
+
+- GET /api/transactions/:id
+
+  - Para obter detalhes de uma transação
+
+- GET /api/transactions/user/:id
+
+  - Para obter transações de um usuário
