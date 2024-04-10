@@ -1,28 +1,24 @@
 import { FastifyInstance } from 'fastify';
-import { ZodError } from 'zod';
+import { ZodError, z } from 'zod';
 import { fromZodError } from 'zod-validation-error';
-import { transactionSchema } from '../models/transaction';
 import { ClientsRepositoryDatabase } from '../repositories/clients-repository';
-import { NotificationsRepositoryMemory } from '../repositories/notifications-repository';
 import { TransactionsRepositoryDatabase } from '../repositories/transactions-repository';
-import { CreateTransactionUsecase } from '../usecases/create-transaction';
+import { GetTransactionUsecase } from '../usecases/get-transaction';
 
 // TODO: add tests
 
-export async function createTransactionRoute(app: FastifyInstance) {
-  app.post('/transactions', async (request, reply) => {
-    try {
-      const transaction = transactionSchema.parse(request.body);
+export async function getTransactionRoute(app: FastifyInstance) {
+  app.get('/transactions/:id', async (request, reply) => {
+    const getTransactionParamsSchema = z.object({
+      id: z.string()
+    });
 
+    try {
+      const { id } = getTransactionParamsSchema.parse(request.params);
       const clientsRepository = new ClientsRepositoryDatabase();
-      const notificationsRepository = new NotificationsRepositoryMemory();
       const transactionsRepository = new TransactionsRepositoryDatabase();
-      const usecase = new CreateTransactionUsecase(
-        clientsRepository,
-        notificationsRepository,
-        transactionsRepository
-      );
-      const response = await usecase.execute({ transaction });
+      const usecase = new GetTransactionUsecase(clientsRepository, transactionsRepository);
+      const response = await usecase.execute({ id });
 
       if (!response.success) {
         return reply.status(400).send({
@@ -30,10 +26,9 @@ export async function createTransactionRoute(app: FastifyInstance) {
         });
       }
 
-      return reply
-        .status(201)
-        .headers({ location: `/api/transactions/${response.data!.id}` })
-        .send();
+      return reply.status(200).send({
+        data: response.data
+      });
     } catch (e) {
       if (e instanceof ZodError) {
         const validationError = fromZodError(e);

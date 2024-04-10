@@ -4,6 +4,8 @@ dotenv.config();
 import Fastify from 'fastify';
 import { env } from './env';
 import { createTransactionRoute } from './http/create-transaction';
+import { getTransactionRoute } from './http/get-client';
+import { getClientTransactionsRoute } from './http/get-client-transactions';
 
 const server = Fastify({
   logger: true
@@ -14,6 +16,8 @@ server.get('/', async function handler () {
 });
 
 server.register(createTransactionRoute, { prefix: 'api' });
+server.register(getTransactionRoute, { prefix: 'api' });
+server.register(getClientTransactionsRoute, { prefix: 'api' });
 
 const start = async () => {
   try {
